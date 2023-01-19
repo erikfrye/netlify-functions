@@ -31,18 +31,20 @@ const mapping = {
   }
 }
 
-function recursive_find(obj, searchArray) {
-  const searchValue = searchArray.shift();
 
-  if (typeof obj[searchValue] !== 'object') {
-    return obj[searchValue];
-  } else {
-    return recursive_find(obj[searchValue], searchArray);
-  }
-}
 
 const handler = async (event, context) => {
   const data = JSON.parse(event.body);
+
+  function recursive_find(obj, searchArray) {
+    const searchValue = searchArray.shift();
+    console.table(obj[searchValue]);
+    if (typeof obj[searchValue] !== 'object') {
+      return obj[searchValue];
+    } else {
+      return recursive_find(obj[searchValue], searchArray);
+    }
+  }
 
   if (event.httpMethod !== 'GET') {
     return {
