@@ -1,41 +1,38 @@
 const { builder } = require('@netlify/functions')
 
-const bdrs = {
-  'ainglis': 'https://hi.d2l.com/c/Austin-Inglis',
-  'cboyal': 'https://hi.d2l.com/c/Chase-Boyall',
-  'gkobe': 'https://hi.d2l.com/c/Grace-Kobe',
-  'bkraelj': 'https://hi.d2l.com/c/Brad-Kragelj',
-  'jphan': 'https://hi.d2l.com/c/jerry-phan'
-
-}
-
-const mapping = {
-  'k-12': 'bkraelj',
-  'gov': 'jphan',
-  'he': {
-    'ca': 'ainglis',
-    'us': {
-      'al': 'jmarwah',
-      'ak': 'vsharma',
-      'az': 'vsharma',
-      'ar': 'gkobe'
-    }
-  },
-  'corp': {
-    'ca': {
-      'ab': 'pbiswas',
-      'bc': 'pbiswas',
-      'mb': 'pbiswas',
-      'nl': 'jreid'
-    }
-  }
-}
-
-
-
 const handler = async (event, context) => {
   const data = JSON.parse(event.body);
-
+  
+  const bdrs = {
+    'ainglis': 'https://hi.d2l.com/c/Austin-Inglis',
+    'cboyal': 'https://hi.d2l.com/c/Chase-Boyall',
+    'gkobe': 'https://hi.d2l.com/c/Grace-Kobe',
+    'bkraelj': 'https://hi.d2l.com/c/Brad-Kragelj',
+    'jphan': 'https://hi.d2l.com/c/jerry-phan'
+  }
+  
+  const mapping = {
+    'k-12': 'bkraelj',
+    'gov': 'jphan',
+    'he': {
+      'ca': 'ainglis',
+      'us': {
+        'al': 'jmarwah',
+        'ak': 'vsharma',
+        'az': 'vsharma',
+        'ar': 'gkobe'
+      }
+    },
+    'corp': {
+      'ca': {
+        'ab': 'pbiswas',
+        'bc': 'pbiswas',
+        'mb': 'pbiswas',
+        'nl': 'jreid'
+      }
+    }
+  }
+  
   function recursive_find(obj, searchArray) {
     const searchValue = searchArray.shift();
     console.table(obj[searchValue]);
